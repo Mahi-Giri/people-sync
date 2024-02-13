@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import Header from "./Header";
 import { checkValidData } from "../Utils/validate";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../Utils/firebase";
 
 const Login = () => {
     const [isSignIn, setIsSignIn] = useState(true);
@@ -17,13 +19,39 @@ const Login = () => {
         event.preventDefault();
         const errorMessage = checkValidData(email.current.value, password.current.value);
         setErrorMessage(errorMessage);
+
+        if (errorMessage) return;
+
+        if (!isSignIn) {
+            createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMessage(errorCode + "-" + errorMessage);
+                });
+        } else {
+            signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log(user);
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMessage(errorCode + "-" + errorMessage);
+                });
+        }
     };
 
     return (
         <div>
             <Header />
             <div className="absolute">
-                <img className="w-screen h-screen"
+                <img
+                    className="w-screen h-screen"
                     src="https://assets.nflxext.com/ffe/siteui/vlv3/5e16108c-fd30-46de-9bb8-0b4e1bbbc509/29d8d7d7-83cc-4b5f-aa9b-6fd4f68bfaa6/IN-en-20240205-popsignuptwoweeks-perspective_alpha_website_small.jpg"
                     alt="bg-img"
                 />
@@ -57,7 +85,9 @@ const Login = () => {
                     <div className="flex justify-between text-white text-xs">
                         <div className="flex">
                             <input type="checkbox" id="input" className="mr-1" />
-                            <label htmlFor="input" className="cursor-pointer">Remember me</label>
+                            <label htmlFor="input" className="cursor-pointer">
+                                Remember me
+                            </label>
                         </div>
                         <span className="cursor-pointer">Need help?</span>
                     </div>
@@ -68,7 +98,8 @@ const Login = () => {
                             </span>
                         </p>
                         <p className="text-xs mt-4 ">
-                            This page protrcted by Google reCAPTCHA to ensure you're not a bot. <span className="text-blue-500 cursor-pointer">Learn More</span>
+                            This page protrcted by Google reCAPTCHA to ensure you're not a bot.{" "}
+                            <span className="text-blue-500 cursor-pointer">Learn More</span>
                         </p>
                     </div>
                 </form>
