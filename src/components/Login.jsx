@@ -3,23 +3,20 @@ import Header from "./Header";
 import { checkValidData } from "../Utils/validate";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../Utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../Utils/userSlice";
+import { NETFLIX_LOGIN_BG, USER_AVATAR } from "../Utils/constant";
 
 const Login = () => {
     const [isSignIn, setIsSignIn] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const name = useRef(null);
     const email = useRef(null);
     const password = useRef(null);
 
-    const toggleSignIn = () => {
-        setIsSignIn(!isSignIn);
-    };
+    
 
     const handleButtonClick = (event) => {
         event.preventDefault();
@@ -32,10 +29,9 @@ const Login = () => {
             createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    navigate("/browse");
                     updateProfile(user, {
                         displayName: name.current.value,
-                        photoURL: "https://avatars.githubusercontent.com/u/64342114?v=4",
+                        photoURL: USER_AVATAR,
                     })
                         .then(() => {
                             const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -49,8 +45,7 @@ const Login = () => {
                             );
                         })
                         .catch((error) => {
-                            const errorMessage = error.message;
-                            setErrorMessage(errorMessage);
+                            setErrorMessage(error.Message);
                         });
                 })
                 .catch((error) => {
@@ -62,7 +57,6 @@ const Login = () => {
             signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    navigate("/browse");
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -72,15 +66,15 @@ const Login = () => {
         }
     };
 
+    const toggleSignIn = () => {
+        setIsSignIn(!isSignIn);
+    };
+
     return (
         <div>
             <Header />
             <div className="absolute">
-                <img
-                    className="w-screen h-screen"
-                    src="https://assets.nflxext.com/ffe/siteui/vlv3/5e16108c-fd30-46de-9bb8-0b4e1bbbc509/29d8d7d7-83cc-4b5f-aa9b-6fd4f68bfaa6/IN-en-20240205-popsignuptwoweeks-perspective_alpha_website_small.jpg"
-                    alt="bg-img"
-                />
+                <img className="w-screen h-screen" src={NETFLIX_LOGIN_BG} alt="bg-img" />
             </div>
             <div className="absolute w-1/5 bg-black my-36 mx-auto right-0 left-0 rounded-lg bg-opacity-75">
                 <form className="p-12 flex flex-col gap-3 py-6">
