@@ -41,14 +41,13 @@ const Header = () => {
     }, []);
 
     return (
-        <div className="flex justify-between absolute w-full px-8 py-2 bg-gradient-to-b from-black z-10">
+        <header className="flex absolute justify-between w-full px-8 py-2 bg-gradient-to-b from-black z-10">
             <img className="w-48" src={NETFLIX_LOGO} alt="logo" />
             {user && (
                 <div className="flex gap-2 p-4">
                     <img
                         className="w-9 h-9 mt-2"
                         src={USER_LOGO}
-                        // src={user?.photoURL}
                         alt="UserLogo"
                     />
                     <button onClick={handleSignOut} className="text-white font-bold">
@@ -56,7 +55,7 @@ const Header = () => {
                     </button>
                 </div>
             )}
-        </div>
+        </header>
     );
 };
 
