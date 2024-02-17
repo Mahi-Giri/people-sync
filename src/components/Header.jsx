@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../Utils/userSlice";
 import { NETFLIX_LOGO, USER_LOGO } from "../Utils/constant";
+import { toggleSearchView } from "../Utils/searchSlice";
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -40,16 +41,19 @@ const Header = () => {
         return () => unsubscribe();
     }, []);
 
+    const handleSearch = () => {
+        dispatch(toggleSearchView());
+    };
+
     return (
         <header className="flex absolute justify-between w-full px-8 py-2 bg-gradient-to-b from-black z-10">
             <img className="w-48" src={NETFLIX_LOGO} alt="logo" />
             {user && (
                 <div className="flex gap-2 p-4">
-                    <img
-                        className="w-9 h-9 mt-2"
-                        src={USER_LOGO}
-                        alt="UserLogo"
-                    />
+                    <button className="bg-purple-400 font-bold text-white m-auto mr-3 px-4 py-1 rounded-md hover:opacity-80" onClick={handleSearch}>
+                        Search
+                    </button>
+                    <img className="w-9 h-9 mt-2" src={USER_LOGO} alt="UserLogo" />
                     <button onClick={handleSignOut} className="text-white font-bold">
                         Sign Out
                     </button>

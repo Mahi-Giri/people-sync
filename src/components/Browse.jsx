@@ -5,8 +5,12 @@ import SecondaryContainer from "./SecondaryContainer";
 import usePopular from "../Hooks/usePopular";
 import useTopRated from "../Hooks/useTopRated";
 import useUpcoming from "../Hooks/useUpcoming";
+import { Search } from "react-bootstrap-icons";
+import { useSelector } from "react-redux";
 
 const Browse = () => {
+    const showSearch = useSelector((store) => store.search?.showSearch);
+
     useNowPlayingMovie();
     usePopular();
     useTopRated();
@@ -15,8 +19,14 @@ const Browse = () => {
     return (
         <>
             <Header />
-            <MainContainer />
-            <SecondaryContainer />
+            {showSearch ? (
+                <Search />
+            ) : (
+                <>
+                    <MainContainer />
+                    <SecondaryContainer />
+                </>
+            )}
         </>
     );
 };
