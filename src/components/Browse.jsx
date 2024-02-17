@@ -1,5 +1,5 @@
 import Header from "./Header";
-import useNowPlayingMovie from "../HOOKS/useNowPlayingMovie";
+import useNowPlayingMovie from "../Hooks/useNowPlayingMovie";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
 
