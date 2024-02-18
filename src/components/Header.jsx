@@ -11,6 +11,7 @@ const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector((store) => store.user);
+    const showSearch = useSelector((store) => store.search?.showSearch);
 
     const handleSignOut = () => {
         signOut(auth)
@@ -50,8 +51,10 @@ const Header = () => {
             <img className="w-48" src={NETFLIX_LOGO} alt="logo" />
             {user && (
                 <div className="flex gap-2 p-4">
-                    <button className="bg-purple-400 font-bold text-white m-auto mr-3 px-4 py-1 rounded-md hover:opacity-80" onClick={handleSearch}>
-                        Search
+                    <button
+                        className="bg-purple-400 font-bold text-white m-auto mr-3 px-4 py-1 rounded-md hover:opacity-80"
+                        onClick={handleSearch}>
+                        {showSearch ? "Home" : "Search"}
                     </button>
                     <img className="w-9 h-9 mt-2" src={USER_LOGO} alt="UserLogo" />
                     <button onClick={handleSignOut} className="text-white font-bold">

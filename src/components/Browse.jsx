@@ -5,7 +5,7 @@ import SecondaryContainer from "./SecondaryContainer";
 import usePopular from "../Hooks/usePopular";
 import useTopRated from "../Hooks/useTopRated";
 import useUpcoming from "../Hooks/useUpcoming";
-import { Search } from "react-bootstrap-icons";
+import GPTSearch from "./GPTSearch";
 import { useSelector } from "react-redux";
 
 const Browse = () => {
@@ -20,7 +20,7 @@ const Browse = () => {
         <>
             <Header />
             {showSearch ? (
-                <Search />
+                <GPTSearch />
             ) : (
                 <>
                     <MainContainer />
