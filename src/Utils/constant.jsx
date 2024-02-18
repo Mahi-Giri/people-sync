@@ -19,3 +19,5 @@ export const API_OPTIONS = {
 };
 
 export const POSTER_IMAGE = "https://image.tmdb.org/t/p/w500";
+
+export const OPENAI_GPT_KEY = "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";
