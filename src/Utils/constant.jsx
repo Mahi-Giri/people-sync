@@ -13,12 +13,10 @@ export const API_OPTIONS = {
     method: "GET",
     headers: {
         accept: "application/json",
-        Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNThiZmQ3OWQyMmU4ZDI3OTQ3NWI3OTk4YTI4ODA5NyIsInN1YiI6IjY1YWJiMjYyOThmMWYxMDEyNWRmMjNjMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.v2-154VntFqwjysIN_IxcDsYsQYFVSUVUwcyQlPfeEo",
+        Authorization: "Bearer " + process.env.REACT_APP_TMDB_KEY,
     },
 };
 
 export const POSTER_IMAGE = "https://image.tmdb.org/t/p/w500";
 
-export const OPENAI_GPT_KEY = "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";
-// export const OPENAI_GPT_KEY = "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";
+export const OPENAI_GPT_KEY = process.env.REACT_APP_OPENAI_GPT_KEY;
