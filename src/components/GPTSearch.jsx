@@ -5,7 +5,7 @@ import SearchBar from "./SearchBar";
 const GPTSearch = () => {
     return (
         <div>
-            <img className="absolute -z-10 h-full w-full" src={NETFLIX_LOGIN_BG} alt="Bg-Logo" />
+            <img className="absolute -z-10 h-full w-full opacity-70" src={NETFLIX_LOGIN_BG} alt="Bg-Logo" />
             <SearchBar />
             <MovieSuggetion />
         </div>

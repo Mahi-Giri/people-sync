@@ -20,7 +20,7 @@ const SearchBar = () => {
     const handleSearch = async (event) => {
         event.preventDefault();
         const query =
-            "Act a movie recommendations system amd suggest some movie for the query" +
+            "Act a movie recommendations system and suggest some movie for the query" +
             searchInput.current.value +
             ". Give me names of 10 movies, comma separated like the example results given ahead. Example results: Animal, Adipurush, oh My God, Jawan";
 
